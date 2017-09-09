@@ -37,3 +37,4 @@ function smallest(n) {
 
 smallest(10);
 smallest(20);
+smallest(22);
