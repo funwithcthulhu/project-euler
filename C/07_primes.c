@@ -28,6 +28,8 @@ int main(void)
 	end = clock();
 	cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 	printf("Timer: %i finished in %f s\n", limit, cpu_time_used);
+
+	return 0;
 }
 
 bool isPrime(int n)
