@@ -15,7 +15,7 @@ var timer = function(name) {
 
 
 function smallest(n) {
-	var t = timer(n)
+	var t = timer(n);
 	let start = n;
 	let num = start;
 	while (num > 0) {

@@ -1,3 +1,14 @@
+var timer = function(name) {
+	var start = new Date();
+	return {
+		stop: function() {
+			var end  = new Date();
+			var time = end.getTime() - start.getTime();
+			console.log('Timer:', name, 'finished in', time, 'ms');
+		}
+	}
+};
+
 var input = 600851475143;
 
 function largest_prime(n) {
@@ -10,5 +21,6 @@ function largest_prime(n) {
 		}
 	}
 }
+var t = timer(input);
 largest_prime(input);
-
+t.stop();
