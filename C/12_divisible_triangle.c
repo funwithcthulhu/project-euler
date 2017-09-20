@@ -1,3 +1,10 @@
+// Problem 12 from Project Euler
+// Solves the challenge problem (first triangle number 
+// with > 500 divisors) in a second or less
+
+// Mostly naive approach (brute force), however the
+// factors function has been optimized
+
 #include <stdio.h>
 #include <math.h>
 
@@ -17,6 +24,10 @@ int main(void)
     return 0;
 }
 
+// checks the nth triangle number for a given input n for the
+// number of factors it has. if that number is greater than the
+// divisor input number, returns the nth triangle, otherwise
+// recursively checks the n + 1 triangle number
 int triangle_factors(int n, int divisor)
 {
     if (factors(triangle(n)) > divisor) {
@@ -26,6 +37,8 @@ int triangle_factors(int n, int divisor)
     }
 }
 
+// Finds the nth "triangle" number
+// i.e. the 5th triangle number is 1 + 2 + 3 + 4 + 5 = 15
 int triangle(int n)
 {
     int start = 1;
@@ -38,6 +51,7 @@ int triangle(int n)
     return num;
 }
 
+// Finds and returns the number of factors for a given input
 int factors(int n)
 {
     int number_of_factors = 0;
@@ -46,5 +60,8 @@ int factors(int n)
             number_of_factors++;
         }
     }
+
+    // As we are only looping to the sqrt of a given number, we need
+    // to multiply by 2 to get the correct number of factors
     return number_of_factors * 2;
 }
