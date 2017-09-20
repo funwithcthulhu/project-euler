@@ -33,6 +33,17 @@ def triangle(n)
 end
 =end
 
+# We only need the number of factors, not the factors themselves
+# UPDATE: after testing, this method for some reason is slower??,
+# and breaks the program...
+def factors(n)
+  (1..Math.sqrt(n)).select { |x| (n % x).zero? }.size * 2
+end
+
+
+# previous solution below, finds all the factors of a number
+# and adds them to an array
+
 # finds all factors of a number, n
 # optimized O(log n) ??
 def factors(n)
