@@ -3,7 +3,7 @@
 // with > 500 divisors) in a second or less
 
 // Mostly naive approach (brute force), however the
-// factors function has been optimized
+// factors function has been optimized to O(sqrt(n))
 
 #include <stdio.h>
 #include <math.h>
