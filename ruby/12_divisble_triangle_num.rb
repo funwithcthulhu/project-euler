@@ -34,7 +34,7 @@ end
 =end
 
 # finds all factors of a number, n
-# optimized O(log n) ??
+# optimized O(sqrt(n)) ??
 # 
 # Tested a solution that only finds the number of factors,
 # speed was about the same and it broke the program  and 
