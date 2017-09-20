@@ -1,5 +1,10 @@
 # Project Euler problem 12
 
+# recursive solution, breaks at 17907120 (n = 5984, divisor = 480)
+# if you start at an input n = 1.
+# the 5,984th triangle number (17907120) has 480 divisors
+# so let's start there (n = 5984)
+
 # returns the first triangle number "n" that has the minimum number
 # of specified divisors: divisor_lim
 # if no number of divisors specified, then finds the first
@@ -12,6 +17,12 @@ end
 
 # finds the nth triangle number
 def triangle(n)
+  1.upto(n).inject(:+)
+end
+
+=begin
+More C-like implementation of triangle method (above)
+def triangle(n)
   start = 1
   num = 0
   until start > n
@@ -20,6 +31,7 @@ def triangle(n)
   end
   num
 end
+=end
 
 # finds all factors of a number, n
 # optimized O(log n) ??
