@@ -31,16 +31,14 @@ DAYS =
 # Find the number of Sundays meeting the criteria in the below method
 # over a range. Currently, the range can only end in December of the end_year
 def how_many_range?(start_year, start_month, end_year)
-  year = start_year
-  month = start_month
   sundays = 0
-  until year > end_year
-    until month > 12
-      sundays += how_many_each_month?(year, month)
-      month += 1
+  until start_year > end_year
+    until start_month > 12
+      sundays += how_many_each_month?(start_year, start_month)
+      start_month += 1
     end
-    month = 1
-    year += 1
+    start_month = 1
+    start_year += 1
   end
   sundays
 end
