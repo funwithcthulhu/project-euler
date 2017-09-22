@@ -5,8 +5,6 @@
 #
 # I generalized the problem to find all Sundays in a specific range
 # because I initially misread the problem
-# note: currently will find number of Sundays from an initial year and month
-# to the end of a year (Dec) only
 #
 # I've made some small tweaks to find the correct answer, but the
 # code can be re-adjusted to find more general answers quite easily
@@ -29,11 +27,12 @@ DAYS =
   }.freeze
 
 # Find the number of Sundays meeting the criteria in the below method
-# over a range. Currently, the range can only end in December of the end_year
-def how_many_range?(start_year, start_month, end_year)
+# over a range. 
+def how_many_range?(start_year, start_month, end_year, end_month)
   sundays = 0
   until start_year > end_year
     until start_month > 12
+      return sundays if start_year == end_year && start_month == end_month
       sundays += how_many_each_month?(start_year, start_month)
       start_month += 1
     end
@@ -51,10 +50,10 @@ def how_many_each_month?(year, month)
   sundays = 0
   until day > DAYS[month]
     t = Time.mktime(year, month, day)
-    # remove '&& day == 1, or change 1 to any day, to
-    # find the number of Sundays on any specific day of
-    # any given month, or a range of values using the above method
-    sundays += 1 if t.sunday? && day == 1
+    # remove '&& day == 1', or change 1 to any day, to
+    # find the number of Sundays on that specific day of
+    # any given month
+    sundays += 1 if t.sunday?  && day == 1
     day += 1
   end
   sundays
