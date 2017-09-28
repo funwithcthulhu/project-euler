@@ -26,8 +26,10 @@ DAYS =
     12 => 31
   }.freeze
 
-# Find the number of Sundays meeting the criteria in the below method
-# over a range. 
+# Find the number of Sundays meeting the criteria over a range
+# by calling 'how_many_each_month' for each month and each year
+# over the range, and keeping a tally of all sundays returned each
+# times
 def how_many_range?(start_year, start_month, end_year, end_month)
   sundays = 0
   until start_year > end_year
