@@ -9,7 +9,7 @@ until n.to_s.length == 1000
 end
 
 puts index
-puts "Elapsed Time: #{(Time.now - timer_start)*1000} milliseconds"
+puts "Elapsed Time: #{(Time.now - timer_start) * 1000} ms"
 
 # $ ruby 25_1000d_fib.rb
 # 4782

@@ -4,7 +4,7 @@ def powers(start, a, b)
   n = start
   while n <= b
     arr << a**n
-    n+=1
+    n += 1
   end
   arr
 end
@@ -19,4 +19,3 @@ def distinct(a, b)
   end
   arr.flatten.sort.uniq.size
 end
-

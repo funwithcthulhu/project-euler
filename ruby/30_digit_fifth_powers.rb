@@ -9,10 +9,14 @@ def power_sum(n, exp)
   arr.inject(:+) == n
 end
 
-digit_power =->(start, finish, exp) {(start..finish).select { |num| power_sum(num, exp)}.inject(:+)}
+def digit_power(start, finish, exp)
+  (start..finish).select do |num|
+    power_sum(num, exp)
+  end.inject(:+)
+end
 
 Benchmark.bm do |x|
-  x.report('5: ') { puts fifth_power[1000, 999999, 5] }
+  x.report('5: ') { puts digit_power(1_000, 999_999, 5) }
 end
 
 #       user     system      total        real
