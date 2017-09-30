@@ -14,5 +14,5 @@ def digit_factorial_sum(lim)
   arr = []
   (3..lim).select do |x|
     factorial_sum(x)
-  end
+  end.inject(:+)
 end
