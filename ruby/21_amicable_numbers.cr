@@ -27,3 +27,7 @@ end
 
 puts amicable_sum(10_000)
 puts "Elapsed Time: #{(Time.now - timer_start)*1000} ms"
+
+# $ crystal 21_amicable_numbers.cr
+# 31626
+# Elapsed Time: 00:00:39.6360000 ms
