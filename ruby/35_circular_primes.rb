@@ -1,4 +1,5 @@
 require 'prime'
+require 'benchmark'
 
 def circular?(n)
   s = n.to_s.size
@@ -13,7 +14,15 @@ def circular?(n)
 end
 
 def count_circulars(lim)
-  (2...lim).select do |number|
+  (1..lim).step(2).select do |number|
     circular?(number)
-  end.size
+  end.size + 1
 end
+
+Benchmark.bm do |x|
+  x.report('no step: ') { puts count_circulars(1_000_000) }
+end
+
+#        user     system      total        real
+#   no step: 55
+#      5.470000   0.040000   5.510000 (  5.572924)
