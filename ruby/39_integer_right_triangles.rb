@@ -1,3 +1,10 @@
+# Project Euler 39
+# Same code ported to Crystal solves in about 31 minutes
+#
+# I ended the program before a solution was generated
+#
+# In Ruby the program was taking longer than 31 minutes..
+
 def right_triangle?(a, b, c)
   a**2 + b**2 == c**2
 end
