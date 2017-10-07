@@ -22,14 +22,16 @@ def perms
   end
 end
 
+perms 
+
 # using cmp lambda taking other lambdas as arguments
 
-user     system      total        real
-142857
- 0.910000   0.000000   0.910000 (  0.913480)
+# user     system      total        real
+# 142857
+# 0.910000   0.000000   0.910000 (  0.913480)
 
 # using lambdas, and cmp lambda w.o taking lambdas as arguments
 
-user     system      total        real
-142857
- 0.830000   0.000000   0.830000 (  0.835862)
+# user     system      total        real
+# 142857
+# 0.830000   0.000000   0.830000 (  0.835862)
