@@ -2,8 +2,9 @@
 # Naive, brute force approach
 #
 # Solves in about 31 minutes
-#
+# EDIT: RELEASE COMPILED SOLVES IN 176 seconds
 # TODO: optimizations to get solve time < 1 minute
+require "Benchmark"
 
 def right_triangle?(a, b, c)
   a**2 + b**2 == c**2
@@ -36,10 +37,12 @@ def maximum?(limit)
     end
   end
   p max_p
-  p side_arr
 end
 
-maximum?(1000)
+Benchmark.bm do |x|
+  x.report("1000: ") { maximum?(1000) }
+end
+
 
 # $ crystal 39_right_triangles.cr
 # 840
@@ -59,3 +62,8 @@ maximum?(1000)
 # [360, 105, 375],
 # [390, 56, 394],
 # [399, 40, 401]]
+
+# RELEASE COMPILED
+# user     system      total        real
+# 1000:  840
+#  175.290000   0.390000   175.680000 (  176.550674)
