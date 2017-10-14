@@ -1,16 +1,22 @@
 require 'prime'
+require 'benchmark'
 
-def pfactor(x)
+def pfactor(x, sz)
   (1..x).map do |i|
     i if x % i == 0 && i.prime?
   end
   .compact
-  .size > 3
+  .size > sz
 end
 
-def find(limit)
-  (10_000..limit).map do |y|
-    y if pfactor(y) && (pfactor(y - 1) || pfactor(y + 1))
+def find(beg = 10_000, lim, sz)
+  (beg..lim).each_cons(4) do |a, b, c, d|
+    if pfactor(a, sz) && pfactor(b, sz) && pfactor(c, sz) && pfactor(d, sz)
+      return "#{a}, #{b}, #{c}, #{d}"
+    end 
   end
-  .compact
+end
+
+Benchmark.bm do |x|
+  x.report("4 consec: ") { puts find(100_000, 200_000, 3)}
 end

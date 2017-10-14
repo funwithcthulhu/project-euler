@@ -1,4 +1,4 @@
-timer_start = Time.now
+require "benchmark"
 
 def divisors(number : Int)
   arr = (1..Math.sqrt(number)).select do |val|
@@ -25,9 +25,19 @@ def amicable_sum(limit)
   end.sum
 end
 
-puts amicable_sum(10_000)
-puts "Elapsed Time: #{(Time.now - timer_start)*1000} ms"
+Benchmark.bm do |x|
+  x.report("10_000: ") { puts amicable_sum(10_000) }
+end
 
 # $ crystal 21_amicable_numbers.cr
 # 31626
 # Elapsed Time: 00:00:39.6360000 ms
+# time logged with benchmark module
+#                user     system      total        real
+# 10_000:  31626
+# 0.040000   0.000000   0.040000 (  0.038844)
+
+# RELEASE COMPILED
+#  user     system      total        real
+# 10_000:  31626
+# 0.010000   0.000000   0.010000 (  0.015846)
