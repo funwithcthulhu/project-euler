@@ -1,6 +1,17 @@
 require "benchmark"
 require "big/big_int.cr"
 
+def mod_exp(b : Int64, exp : Int64, mod)
+  prod = 1_i64
+  base = b % mod
+  until exp.zero?
+    prod = (prod * base) % mod if exp.odd?
+    exp >>= 1_i64
+    base = (base * base) % mod
+  end
+  prod
+end
+
 def isPrime(n : Int64)
   if n == 1_i64
     false
@@ -26,27 +37,33 @@ end
 
 def unitary_sum(num : Int64)
   factors = factors(num)
-  sum = BigInt.new("1")
+  sum = 1_i64
   factors.each do |sub_array|
-    sum *= BigInt.new("1") + sub_array
-    sum %= 1_000_000_009
+    sum *= 1_i64 + sub_array
+    sum %= 1_000_000_009_i64
   end
   sum
 end
 
 def factors(n : Int64)
-  two = BigInt.new("2")
-  primes = [] of BigInt
-  (2_i64..n).each do |x|
-    count = BigInt.new("0")
+  primes = [] of Int64
+  c = 0_i64
+  l = 1_i64
+  until 2_i64**l > n
+    c += (n / 2_i64**l)
+    l += 1_i64
+  end
+  primes << mod_exp((2_i64 * 2_i64), c, 1_000_000_009_i64)
+  (3_i64..n).step(2_i64).each do |x|
+    count = 0_i64
     if isPrime(x)
-      x = BigInt.new(x)
-      i = BigInt.new("1")
+      i = 1_i64
       until x**i > n
         count += (n / x**i)
         i += 1
       end
-      primes << (x**2)**count
+      primes << mod_exp((x * x), count, 1_000_000_009_i64)
+      #primes << (x*2)**count
     end
   end
   primes
