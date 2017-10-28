@@ -31,8 +31,6 @@ def sum(lim)
   puts hits.reduce(:+)
 end
 
-Benchmark.bm { |x| x.report { sum(1_000)}}
-
 Benchmark.bm do |x|
   x.report("#{ARGV[0]}: ") { sum(ARGV[0].to_i) }
 end
