@@ -154,14 +154,14 @@ int isPrime(long n)
     {
 		long r = floor(sqrt(n));
 		long f = 5;
-        while (f <= r)
-        {
-            if (n % f == 0)
-            {
+		while (f <= r)
+		{
+			if (n % f == 0)
+			{
 				return 0;
-            }
-            else if (n % (f + 2) == 0)
-            {
+			}
+			else if (n % (f + 2) == 0)
+			{
 				return 0;
 			}
 			f += 6;
