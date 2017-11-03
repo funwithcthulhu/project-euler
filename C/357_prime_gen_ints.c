@@ -5,9 +5,12 @@
 // Find the sum of all positive integers n not exceeding 100 000 000
 // such that for every divisor d of n, d+n/d is prime.
 
+// note: altering the divisor function increased total speed by a small amount,
+// but program not longer gives correct output for n = 10
+
 // $ ./357_prime_gen_ints 100000000
 // Sum of prime generating integers: 1739023853137
-// Timer: 181.217892 s
+// Timer: 177.919737 s
 //
 // $ ./357_prime_gen_ints 10
 // Sum of prime generating integers: 19
@@ -17,19 +20,19 @@
 // Timer: 0.000055 s
 // $ ./357_prime_gen_ints 1000
 // Sum of prime generating integers: 8427
-// Timer: 0.000120 s
+// Timer: 0.000108 s
 // $ ./357_prime_gen_ints 10000
 // Sum of prime generating integers: 262615
-// Timer: 0.001000 s
+// Timer: 0.000885 s
 // $ ./357_prime_gen_ints 100000
 // Sum of prime generating integers: 9157937
-// Timer: 0.015168 s
+// Timer: 0.014459 s
 // $ ./357_prime_gen_ints 1000000
 // Sum of prime generating integers: 524402305
-// Timer: 0.301059 s
+// Timer: 0.264181 s
 // $ ./357_prime_gen_ints 10000000
 // Sum of prime generating integers: 27814470277
-// Timer: 7.089371 s
+// Timer: 6.208527 s
 
 #include <stdio.h>
 #include <time.h>
@@ -104,25 +107,16 @@ long sum(long n, long *primes)
 
 int generator(long n, long *primes)
 {
-    long divisors[1000];
     long count = 0;
     for (long j = 1; j <= sqrt(n); j++)
     {
         if (n % j == 0)
         {
-            divisors[count] = j;
-            count++;
-            divisors[count] = (n / j);
-            count++;
-        }
-    }
-
-    for (long k = 0; k < count; k++)
-    {
-        long temp = divisors[k] + (n / divisors[k]);
-        if (primes[temp] == 0)
-        {
-            return 0;
+            long temp = j + (n / j);
+            if (primes[temp] == 0)
+            {
+                return 0;
+            }
         }
     }
     return 1;
