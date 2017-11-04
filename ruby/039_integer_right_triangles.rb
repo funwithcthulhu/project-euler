@@ -1,5 +1,47 @@
-# Project Euler 39
-# Same code ported to Crystal solves in about 31 minutes
+# Project Euler 39 - Integer right triangles
+# If p is the perimeter of a right angle triangle with integral length
+# sides, {a,b,c}, there are exactly three solutions for p = 120.
+
+# {20,48,52}, {24,45,51}, {30,40,50}
+
+# For which value of p ≤ 1000, is the number of solutions maximised?
+
+# EDIT: November 4, 2017
+# Came back to this problem today and rewrote it. Solution in Ruby now takes
+# about 35 ms. Nice to see some improvement in my code-writing skills!
+# Find new code below, and old solution at bottom of the page.
+
+require 'benchmark'
+
+Cache = Hash.new(0)
+
+def search(limit)
+  right_triangle = ->(a, b, c) { a**2 + b**2 == c**2 }
+  (1..limit).each do |a|
+    ((a + 1)..limit).each do |b|
+      c = Math.sqrt(a**2 + b**2).floor
+      break if (a + b + c) > limit
+      if right_triangle[a, b, c]
+        Cache[a+b+c] += 1
+      end
+    end
+  end
+end
+
+Benchmark.bm do |x|
+  x.report do 
+    search(1000)
+    p Cache.key(Cache.values.max)
+  end
+end
+
+# user     system      total        real
+# 840
+# 0.030000   0.000000   0.030000 (  0.030711)
+
+# Old (aka shitty) solution below (from September 30)
+#
+# Same code ported to Crystal solves in 176 seconds
 #
 # I ended the program before a solution was generated
 #
@@ -38,3 +80,8 @@ def maximum?(limit)
   p max_p
   p side_arr
 end
+
+# Crystal benchmarks
+# user     system      total        real
+# 1000:  840
+#  175.290000   0.390000   175.680000 (  176.550674)
