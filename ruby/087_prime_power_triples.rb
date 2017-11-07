@@ -39,10 +39,10 @@ def search(lim)
     # we can break the loop much lower than the limit
     break if a > Math.sqrt(lim)
     Prime.each do |b|
-      # We only need to go up to the 3rd root of b
+      # We can stop b at the 3rd root of the limit
       break if b > (lim ** (1.0/3))
       Prime.each do |c|
-        # We only need to go up to the 4rd root of c
+        # We can stop c at the 4th root of the limit
         break if c > (lim ** (1.0/4))
         t = a**2 + b**3 + c**4
         break if t > lim
@@ -70,10 +70,10 @@ def search(lim)
     # we can break the loop much lower than the limit
     break if a > Math.sqrt(lim)
     Prime.each do |b|
-      # We only need to go up to the 3rd root of b
+      # We can stop b at the 3rd root of the limit
       break if b > (lim ** (1.0/3))
       Prime.each do |c|
-        # We only need to go up to the 4rd root of c
+        # We can stop c at the 4th root of the limit
         break if c > (lim ** (1.0/4))
         t = a**2 + b**3 + c**4
         break if t > lim
@@ -102,10 +102,10 @@ def search(lim)
     # we can break the loop much lower than the limit
     break if a > Math.sqrt(lim)
     Prime.each do |b|
-      # We only need to go up to the 3rd root of b
+      # We can stop b at the 3rd root of the limit
       break if b > (lim ** (1.0/3))
       Prime.each do |c|
-        # We only need to go up to the 4rd root of c
+        # We can stop c at the 4th root of the limit
         break if c > (lim ** (1.0/4))
         t = a**2 + b**3 + c**4
         break if t > lim
