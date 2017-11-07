@@ -18,9 +18,12 @@
 # to a simple counter, using a hash table to keep track of duplicate values. This code can be found
 # at the bottom, and runs a little bit faster. It also seems a more appropriate use of data structures.
 
+# Update: Using Set appears to be the fastest option for the input. 
+# Further optimizations included limiting b < 3rd root of limit, and c < 4th root
+
 # user     system      total        real
 # 1097343
-# 2.850000   0.300000   3.150000 (  3.164138)
+# 1.210000   0.360000   1.570000 (  1.791648)
 
 require 'benchmark'
 require 'prime'
@@ -36,9 +39,11 @@ def search(lim)
     # we can break the loop much lower than the limit
     break if a > Math.sqrt(lim)
     Prime.each do |b|
-      break if b > Math.sqrt(lim)
+      # We only need to go up to the 3rd root of b
+      break if b > (lim ** (1.0/3))
       Prime.each do |c|
-        break if c > Math.sqrt(lim)
+        # We only need to go up to the 4rd root of c
+        break if c > (lim ** (1.0/4))
         t = a**2 + b**3 + c**4
         break if t > lim
         count[t] = t
@@ -55,7 +60,7 @@ Benchmark.bm { |x| x.report { puts search(50_000_000) }}
 
 # user     system      total        real
 # 1097343
-# 2.800000   0.020000   2.820000 (  2.842315)
+# 1.100000   0.090000   1.190000 (  1.202007)
 
 def search(lim)
   count = 0
@@ -65,9 +70,11 @@ def search(lim)
     # we can break the loop much lower than the limit
     break if a > Math.sqrt(lim)
     Prime.each do |b|
-      break if b > Math.sqrt(lim)
+      # We only need to go up to the 3rd root of b
+      break if b > (lim ** (1.0/3))
       Prime.each do |c|
-        break if c > Math.sqrt(lim)
+        # We only need to go up to the 4rd root of c
+        break if c > (lim ** (1.0/4))
         t = a**2 + b**3 + c**4
         break if t > lim
         next if cache.key?(t)          
@@ -83,12 +90,11 @@ Benchmark.bm { |x| x.report { puts search(50_000_000) }}
 
 require 'set'
 
-# Note: Testing out using a set here instead of a hash lookup/array... runs a little
-# slower than the hash look up above.
+# Testing out 'set' here
 
-#        user     system      total        real
+# user     system      total        real
 # 1097343
-# 2.790000   0.060000   2.850000 (  2.853030)
+# 1.030000   0.030000   1.060000 (  1.058026)
 def search(lim)
   count = Set.new
   Prime.each do |a|
@@ -96,9 +102,11 @@ def search(lim)
     # we can break the loop much lower than the limit
     break if a > Math.sqrt(lim)
     Prime.each do |b|
-      break if b > Math.sqrt(lim)
+      # We only need to go up to the 3rd root of b
+      break if b > (lim ** (1.0/3))
       Prime.each do |c|
-        break if c > Math.sqrt(lim)
+        # We only need to go up to the 4rd root of c
+        break if c > (lim ** (1.0/4))
         t = a**2 + b**3 + c**4
         break if t > lim
         count.add(t)
