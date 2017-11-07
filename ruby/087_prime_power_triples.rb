@@ -80,3 +80,32 @@ def search(lim)
 end
 
 Benchmark.bm { |x| x.report { puts search(50_000_000) }}
+
+require 'set'
+
+# Note: Testing out using a set here instead of a hash lookup/array... runs a little
+# slower than the hash look up above.
+
+#        user     system      total        real
+# 1097343
+# 2.790000   0.060000   2.850000 (  2.853030)
+def search(lim)
+  count = Set.new
+  Prime.each do |a|
+    # Because we are exponentiating each prime,
+    # we can break the loop much lower than the limit
+    break if a > Math.sqrt(lim)
+    Prime.each do |b|
+      break if b > Math.sqrt(lim)
+      Prime.each do |c|
+        break if c > Math.sqrt(lim)
+        t = a**2 + b**3 + c**4
+        break if t > lim
+        count.add(t)
+      end
+    end
+  end
+  count.size
+end
+
+Benchmark.bm { |x| x.report { puts search(50_000_000) }}
