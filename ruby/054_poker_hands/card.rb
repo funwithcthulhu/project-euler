@@ -4,13 +4,13 @@ class Card
   attr_accessor :value
   attr_reader :suit
 
-  Faces = 
-    { 
+  Faces =
+    {
       'A' => 1,
       'T' => 10,
-      'J' => 11, 
-      'Q' => 12, 
-      'K' => 13 
+      'J' => 11,
+      'Q' => 12,
+      'K' => 13
     }.freeze
 
   def initialize(value)
@@ -19,6 +19,6 @@ class Card
   end
 
   def <=>(other)
-    self.value <=> other.value
+    value <=> other.value
   end
 end

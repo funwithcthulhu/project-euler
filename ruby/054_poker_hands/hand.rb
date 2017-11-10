@@ -14,38 +14,28 @@ class Hand
   end
 
   def <=>(other)
-    self.score <=> other.score
+    score <=> other.score
   end
 
   def higher?(other)
-    a = self.hand.dup.sort
-    a.each_index do |i|
-      a[i].value = 14 if a[i].value == 1
-    end
-    b = other.hand.dup.sort
-    b.each_index do |i|
-      b[i].value = 14 if b[i].value == 1
-    end
+    a = hand.sort.map(&:value).map { |x| x == 1 ? 14 : x }
+    b = other.hand.sort.map(&:value).map { |x| x == 1 ? 14 : x }
     rec_higher?(a, b)
   end
 
   private
 
   def rec_higher?(a, b)
-    if a.last > b.last
-      return true
-    elsif a.last < b.last
-      return false
-    else
-      a.pop
-      b.pop
-      rec_higher?(a, b)
-    end
+    return true unless a.last < b.last
+    return false unless a.last > b.last
+    a.pop
+    b.pop
+    rec_higher?(a, b)
   end
 
   def score_me
     matches
-    @score += 70 if straight?  
+    @score += 70 if straight?
     @score += 80 if flush?
     @score += 100 if royal? && flush?
   end
