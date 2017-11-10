@@ -33,8 +33,6 @@
 </html>
 
 
-How many hands does Player 1 win?
-
 ANSWER: player 1 wins: 376
 
 For this problem, I created card and poker hand 'objects'. I used regular 5 card poker rules
