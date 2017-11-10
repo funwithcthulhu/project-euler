@@ -34,36 +34,34 @@ class Hand
   end
 
   def score_me
-    matches
+    matches?
     @score += 70 if straight?
     @score += 80 if flush?
     @score += 100 if royal? && flush?
   end
 
-  def matches
-    private_score = 0
-    w = @hand.dup
-    w.each_index do |i|
-      w[i].value = 14 if w[i].value == 1
+  def matches?
+    @pairs = 0
+    @triples = 0
+    @w = @hand.dup
+    @w.each_index do |i|
+      @w[i].value = 14 if @w[i].value == 1
     end
-    pairs = 0
-    triples = 0
-    w.group_by(&:value).each_pair do |face, num|
+    tally_matches
+    @score += 15 if @pairs == 2
+    @score += 40 if @pairs == 1 && @triples == 1
+  end
+
+  def tally_matches
+    @w.group_by(&:value).each_pair do |face, num|
       if num.size == 2
-        pairs += 1
-        private_score += face
+        (@pairs += 1) && (@score += face)
       elsif num.size == 3
-        triples += 1
-        private_score += face
-        private_score += 44
+        (@triples += 1) && (@score += face + 44)
       elsif num.size == 4
-        private_score += face
-        private_score += 129
+        @score += face + 129
       end
     end
-    private_score += 15 if pairs == 2
-    private_score += 40 if pairs == 1 && triples == 1
-    @score += private_score
   end
 
   def straight?
