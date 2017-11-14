@@ -69,7 +69,7 @@ end
 puts code.join
 
 # 73162890
-
+# 1st line 319
 __END__
 319
 680
