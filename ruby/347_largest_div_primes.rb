@@ -1,4 +1,5 @@
 # Project Euler Problem 347: Largest integer divisible by two primes
+# November 18, 2017
 
 # The largest integer ≤ 100 that is only divisible by both the
 # primes 2 and 3 is 96, as 96=32*3=25*3. For two distinct primes
